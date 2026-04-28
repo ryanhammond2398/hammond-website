@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Financial Planning | Hammond Wealth Partners</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Cinzel:wght@400;700&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #2e4a7d;
+    --navy-dark: #1e3260;
+    --cream: #eedece;
+    --cream-dark: #ecdbc6;
+    --cream-light: #f5e6d3;
+    --gold: #b8973a;
+    --gold-light: #d4b05a;
+    --text-muted: #6b7a9a;
+    --white: #ffffff;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; background: rgb(245,230,211); color: var(--navy); overflow-x: hidden; }
+  a { text-decoration: none; color: inherit; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgb(245,230,211);
+    border-bottom: 1px solid rgba(30,45,90,0.1);
+    padding: 14px 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    min-height: 120px;
+  }
+  .nav-logo img { height: 52px; width: auto; display: block; }
+  .nav-links { display: flex; align-items: center; gap: 1.75rem; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { width: 24px; height: 2px; background: #2e4a7d; display: block; transition: all 0.3s; }
+  .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgb(245,230,211); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-family: 'Cinzel', serif; font-size: 18px; color: #2e4a7d; letter-spacing: 0.2em; text-transform: uppercase; }
+  .mobile-menu .close { position: absolute; top: 2rem; right: 2rem; font-size: 28px; cursor: pointer; color: #2e4a7d; background: none; border: none; }
+  .mobile-menu .nav-cta-mobile { background: #b8973a; color: #1a2f5e !important; padding: 14px 32px; font-size: 12px !important; }
+  .nav-links a { font-size: 11px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy); opacity: 0.7; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { background: var(--gold); color: var(--navy-dark) !important; opacity: 1 !important; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; padding: 11px 24px; border-radius: 2px; transition: background 0.2s; }
+  .nav-cta:hover { background: #2a3d72 !important; }
+
+  /* HERO */
+  .hero {
+    background: var(--navy);
+    background-image: 
+      linear-gradient(135deg, rgba(184,151,58,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 50%, rgba(184,151,58,0.08) 0%, transparent 60%);
+    min-height: 90vh;
+    display: flex; align-items: center;
+    padding: 7rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -100px; right: -100px;
+    width: 600px; height: 600px;
+    border: 1px solid rgba(245,237,224,0.05);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; top: 50px; right: 50px;
+    width: 380px; height: 380px;
+    border: 1px solid rgba(245,237,224,0.04);
+    border-radius: 50%;
+  }
+  .hero-inner { max-width: 680px; position: relative; z-index: 2; }
+  .hero-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 2.5rem; }
+  .hero-eyebrow-line { width: 32px; height: 1px; background: var(--gold); }
+  .hero-eyebrow span { font-size: 11px; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: 60px; font-weight: 700; color: var(--cream-light); line-height: 1.08; margin-bottom: 1.75rem; }
+  .hero h1 em { font-style: italic; color: #f5e6d3; }
+  .hero-desc { font-size: 16px; font-weight: 300; color: rgba(245,237,224,0.7); line-height: 1.85; margin-bottom: 3rem; max-width: 520px; }
+  .hero-actions { display: flex; gap: 16px; align-items: center; }
+  .btn-gold { background: var(--gold); color: var(--navy-dark); font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; padding: 14px 32px; border-radius: 2px; border: none; cursor: pointer; transition: background 0.2s; }
+  .btn-gold:hover { background: var(--gold-light); }
+  .btn-ghost { color: var(--cream-light); font-size: 11px; font-weight: 300; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.6; display: flex; align-items: center; gap: 8px; transition: opacity 0.2s; }
+  .btn-ghost:hover { opacity: 1; }
+  .btn-ghost::after { content: '→'; font-size: 14px; }
+
+  /* STATS */
+  .stats { background: var(--navy); border-bottom: 3px solid var(--gold); }
+  .stats-inner { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .stat { padding: 2.5rem 2rem; border-right: 1px solid rgba(245,230,211,0.1); text-align: center; }
+  .stat:last-child { border-right: none; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700; color: var(--gold-light); line-height: 1; margin-bottom: 8px; }
+  .stat-label { font-size: 11px; font-weight: 300; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(245,230,211,0.55); }
+
+  /* INTRO */
+  .intro { padding: 8rem 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 7rem; align-items: center; max-width: 1200px; margin: 0 auto; background: rgb(245,230,211); }
+  .intro-label { font-size: 10px; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 10px; }
+  .intro-label::before { content: ''; width: 20px; height: 1px; background: var(--navy); }
+  .intro h2 { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 700; line-height: 1.2; color: var(--navy); margin-bottom: 1.5rem; }
+  .intro p { font-size: 15px; font-weight: 300; color: #4a5570; line-height: 1.9; margin-bottom: 1.25rem; }
+  .intro-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(30,45,90,0.08); border-radius: 3px; overflow: hidden; }
+  .intro-stat { background: rgb(245,230,211); padding: 2rem 1.5rem; }
+  .intro-stat-num { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .intro-stat-label { font-size: 11px; font-weight: 300; color: var(--text-muted); line-height: 1.4; }
+
+  /* SERVICES */
+  .services { 
+    background: var(--navy);
+    background-image: linear-gradient(180deg, rgba(184,151,58,0.04) 0%, transparent 100%);
+    padding: 8rem 4rem; 
+  }
+  .services-header { text-align: center; margin-bottom: 4.5rem; }
+  .services-label { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; }
+  .services h2 { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 700; color: var(--cream-light); }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(245,237,224,0.07); border-radius: 3px; overflow: hidden; max-width: 1100px; margin: 0 auto; }
+  .service { background: rgba(20,30,61,0.7); padding: 2.5rem 2rem; transition: background 0.25s; border-top: 2px solid rgba(184,151,58,0); }
+  .service:hover { background: rgba(30,45,90,0.9); border-top: 2px solid rgba(184,151,58,0.6); }
+  .service-num { font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 300; color: rgba(184,151,58,0.18); line-height: 1; margin-bottom: 1.25rem; }
+  .service h3 { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--cream-light); margin-bottom: 0.75rem; }
+  .service p { font-size: 13px; font-weight: 300; color: rgba(245,237,224,0.55); line-height: 1.8; margin-bottom: 1.5rem; }
+  .service-link { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 6px; }
+  .service-link::after { content: '→'; }
+
+  /* APPROACH */
+  .approach { padding: 8rem 4rem; background: rgb(245,230,211);  }
+  .approach-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 7rem; align-items: start; max-width: 1100px; margin: 0 auto; }
+  .approach h2 { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 700; color: var(--navy); margin-bottom: 1.5rem; line-height: 1.2; }
+  .approach-desc { font-size: 15px; font-weight: 300; color: #4a5570; line-height: 1.9; }
+  .steps { display: flex; flex-direction: column; }
+  .step { display: flex; gap: 1.75rem; padding: 1.75rem 0; border-bottom: 1px solid rgba(30,45,90,0.08); }
+  .step:last-child { border-bottom: none; }
+  .step-num { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700; color: var(--gold); opacity: 0.35; line-height: 1; min-width: 40px; }
+  .step-content h4 { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 600; color: var(--navy); margin-bottom: 5px; }
+  .step-content p { font-size: 13px; font-weight: 300; color: #4a5570; line-height: 1.75; }
+
+  /* TESTIMONIALS */
+  .testimonials { background: rgb(245,230,211); padding: 8rem 4rem; }
+  .testimonials-label { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; text-align: center; }
+  .testimonials h2 { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 700; color: var(--navy); text-align: center; margin-bottom: 4.5rem; }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 960px; margin: 0 auto; }
+  .testimonial { background: var(--cream-light); border: 1px solid rgba(30,45,90,0.1); border-left: 3px solid var(--gold); border-radius: 3px; padding: 2.5rem; }
+  .testimonial-quote { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-style: italic; color: var(--navy); line-height: 1.7; margin-bottom: 1.5rem; }
+  .testimonial-quote::before { content: '\201C'; font-size: 42px; color: var(--navy); line-height: 0; vertical-align: -16px; margin-right: 4px; }
+  .testimonial-author { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); }
+  .testimonial-since { font-size: 11px; font-weight: 300; color: var(--text-muted); margin-top: 4px; }
+
+  /* CTA */
+  .cta { background: var(--navy); padding: 8rem 4rem; text-align: center; }
+  .cta-eyebrow { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; }
+  .cta h2 { font-family: 'Playfair Display', serif; font-size: 44px; font-weight: 700; color: var(--cream-light); margin-bottom: 1.25rem; line-height: 1.15; }
+  .cta p { font-size: 15px; font-weight: 300; color: rgba(245,237,224,0.6); max-width: 480px; margin: 0 auto 3rem; line-height: 1.85; }
+  .cta-form { display: flex; gap: 0; max-width: 460px; margin: 0 auto; }
+  .cta-form input { flex: 1; padding: 14px 18px; background: rgba(245,237,224,0.07); border: 1px solid rgba(245,237,224,0.15); border-right: none; color: var(--cream-light); font-family: 'Jost', sans-serif; font-size: 13px; outline: none; }
+  .cta-form input::placeholder { color: rgba(245,237,224,0.3); }
+  .cta-form button { background: var(--navy); color: var(--navy-dark); font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; padding: 14px 28px; border: none; cursor: pointer; white-space: nowrap; transition: background 0.2s; }
+  .cta-form button:hover { background: var(--navy); }
+  .cta-note { font-size: 10px; font-weight: 300; color: rgba(245,237,224,0.3); margin-top: 1.25rem; letter-spacing: 0.08em; }
+
+  /* FOOTER */
+  footer { background: #0d1428; padding: 2.5rem 4rem; display: flex; align-items: center; justify-content: space-between; }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; color: rgba(245,237,224,0.45); letter-spacing: 0.05em; }
+  .footer-links { display: flex; gap: 2rem; }
+  .footer-links a { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245,237,224,0.25); transition: color 0.2s; }
+  .footer-links a:hover { color: rgba(245,237,224,0.55); }
+  .footer-copy { font-size: 10px; font-weight: 300; color: rgba(245,237,224,0.2); }
+
+  @media (max-width: 768px) {
+    nav {
+      padding: 14px 1.5rem;
+      min-height: auto;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .nav-links { display: none; }
+    .hero { padding: 4rem 1.5rem; min-height: auto; }
+    .hero h1 { font-size: 36px; }
+    .hero-desc { font-size: 14px; }
+    .hero-actions { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .stat { border-right: none; border-bottom: 1px solid rgba(30,45,90,0.08); }
+    .intro { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
+    .intro-stats { grid-template-columns: 1fr 1fr; }
+    .services { padding: 4rem 1.5rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .approach { padding: 4rem 1.5rem; }
+    .approach-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .testimonials { padding: 4rem 1.5rem; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .cta { padding: 4rem 1.5rem; }
+    .cta h2 { font-size: 30px; }
+    .cta-form { flex-direction: column; }
+    .cta-form input { border-right: 1px solid rgba(245,237,224,0.15); border-bottom: none; }
+    footer { flex-direction: column; gap: 1.5rem; padding: 2rem 1.5rem; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+    section > div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; gap: 3rem !important; }
+    section > div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; gap: 3rem !important; }
+    section[style*="padding:8rem 4rem"] { padding: 4rem 1.5rem !important; }
+    div[style*="grid-template-columns:1fr 1fr 1fr"] { grid-template-columns: 1fr !important; gap: 2rem !important; }
+    div[style*="padding: 0 4rem"] { padding: 0 1.5rem !important; }
+    h2[style*="font-size:38px"] { font-size: 28px !important; }
+    .nav-logo > div { width: auto !important; }
+  }
+
+
+  @media (max-width: 768px) {
+    .hamburger { display: flex; }
+    .nav-links { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;border:2px solid #2e4a7d;padding:16px 22px;width:260px;">
+      <img src="data:image/png;base64,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" style="height:48px;width:auto;display:block;"/>
+      <div style="width:240px;">
+        <div style="display:flex;align-items:center;justify-content:center;gap:10px;">
+          <div style="height:1px;background:#b8973a;width:28px;flex-shrink:0;"></div>
+          <span style="font-family:'Cinzel',serif;font-size:17px;font-weight:700;color:#2e4a7d;letter-spacing:0.2em;white-space:nowrap;">HAMMOND</span>
+          <div style="height:1px;background:#b8973a;width:28px;flex-shrink:0;"></div>
+        </div>
+        <div style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;color:#2e4a7d;letter-spacing:0.22em;margin-top:3px;text-align:center;width:100%;"><span style="color:#b8973a;">—</span> Wealth Partners <span style="color:#b8973a;">—</span></div>
+      </div>
+    </div>
+  </div>
+  <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links">
+    <a href="index.html#services">Services</a>
+    <a href="index.html#approach">Our approach</a>
+    <a href="index.html#pricing">Pricing</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#contact" class="nav-cta">Schedule a consultation</a>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close" onclick="document.getElementById('mobileMenu').classList.remove('open')">&times;</button>
+  <a href="index.html#services" onclick="document.getElementById('mobileMenu').classList.remove('open')">Services</a>
+  <a href="index.html#approach" onclick="document.getElementById('mobileMenu').classList.remove('open')">Our Approach</a>
+  <a href="index.html#pricing" onclick="document.getElementById('mobileMenu').classList.remove('open')">Pricing</a>
+  <a href="index.html#about" onclick="document.getElementById('mobileMenu').classList.remove('open')">About</a>
+  <a href="index.html#contact" class="nav-cta-mobile" onclick="document.getElementById('mobileMenu').classList.remove('open')">Schedule a Consultation</a>
+</div>
+
+<div style="background:#f5e6d3;border-bottom:1px solid rgba(30,45,90,0.08);">
+  <div style="background:var(--gold);padding:9px 4rem;display:flex;align-items:center;justify-content:center;">
+    <span style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;color:#fff;letter-spacing:0.12em;text-transform:uppercase;opacity:0.92;white-space:nowrap;">Fee-Only &nbsp;·&nbsp; Fiduciary &nbsp;·&nbsp; Independent &nbsp;·&nbsp; M.S. Economics</span>
+  </div>
+</div>
+
+<div style="background:rgb(245,230,211);padding:12px 4rem;border-bottom:1px solid rgba(46,74,125,0.1);">
+  <a href="index.html" style="font-family:'Jost',sans-serif;font-size:11px;font-weight:400;color:#2e4a7d;letter-spacing:0.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;">← Back to home</a>
+</div>
+<!-- Hero -->
+<section style="background:#2e4a7d;padding:6rem 4rem;position:relative;">
+  <div style="max-width:700px;position:relative;z-index:2;">
+    <div style="font-size:10px;font-weight:400;letter-spacing:0.28em;text-transform:uppercase;color:#b8973a;margin-bottom:1rem;">Our Services</div>
+    <h1 style="font-family:'Playfair Display',serif;font-size:52px;font-weight:700;color:#f5e6d3;line-height:1.08;margin-bottom:1.5rem;">Financial Planning</h1>
+    <p style="font-size:18px;font-weight:300;font-style:italic;color:rgba(245,230,211,0.7);line-height:1.7;margin-bottom:1.5rem;">A living plan built around your life, not a template.</p>
+    <p style="font-size:15px;font-weight:300;color:rgba(245,230,211,0.6);line-height:1.85;">Most financial plans are created once, filed away, and forgotten. At Hammond Wealth Partners, your financial plan is a living document that evolves as your life does.</p>
+  </div>
+</section>
+
+<!-- Content -->
+<section style="background:rgb(245,230,211);padding:6rem 4rem;">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr;gap:6rem;align-items:start;">
+    
+    <!-- Main content -->
+    <div>
+      
+            <div style="margin-bottom:3rem;">
+              <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#2e4a7d;margin-bottom:1rem;">What is comprehensive financial planning?</h3>
+              <p style="font-size:15px;font-weight:300;color:#4a5570;line-height:1.9;">Financial planning is the foundation of everything we do. Before we recommend a single investment or strategy, we take the time to understand your complete financial picture. That means your income, your debts, your goals, your family, your timeline, and what keeps you up at night. Only then do we build a plan that actually makes sense for your life.</p>
+            </div>
+            <div style="margin-bottom:3rem;">
+              <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#2e4a7d;margin-bottom:1.25rem;">What your plan covers</h3>
+              <ul style="list-style:none;padding:0;"><li style="font-size:15px;font-weight:300;color:#4a5570;line-height:1.85;padding:8px 0;border-bottom:1px solid rgba(46,74,125,0.06);display:flex;align-items:flex-start;gap:12px;"><span style="color:#b8973a;margin-top:4px;">&#10003;</span>Cash flow analysis and budgeting strategy</li><li style="font-size:15px;font-weight:300;color:#4a5570;line-height:1.85;padding:8px 0;border-bottom:1px solid rgba(46,74,125,0.06);display:flex;align-items:flex-start;gap:12px;"><span style="color:#b8973a;margin-top:4px;">&#10003;</span>Debt management and payoff planning</li><li style="font-size:15px;font-weight:300;color:#4a5570;line-height:1.85;padding:8px 0;border-bottom:1px solid rgba(46,74,125,0.06);display:flex;align-items:flex-start;gap:12px;"><span style="color:#b8973a;margin-top:4px;">&#10003;</span>Emergency fund and savings targets</li><li style="font-size:15px;font-weight:300;color:#4a5570;line-height:1.85;padding:8px 0;border-bottom:1px solid rgba(46,74,125,0.06);display:flex;align-items:flex-start;gap:12px;"><span style="color:#b8973a;margin-top:4px;">&#10003;</span>Short and long term goal setting</li><li style="font-size:15px;font-weight:300;color:#4a5570;line-height:1.85;padding:8px 0;border-bottom:1px solid rgba(46,74,125,0.06);display:flex;align-items:flex-start;gap:12px;"><span style="color:#b8973a;margin-top:4px;">&#10003;</span>Insurance and risk review</li><li style="font-size:15px;font-weight:300;color:#4a5570;line-height:1.85;padding:8px 0;border-bottom:1px solid rgba(46,74,125,0.06);display:flex;align-items:flex-start;gap:12px;"><span style="color:#b8973a;margin-top:4px;">&#10003;</span>Investment strategy aligned to your goals</li><li style="font-size:15px;font-weight:300;color:#4a5570;line-height:1.85;padding:8px 0;border-bottom:1px solid rgba(46,74,125,0.06);display:flex;align-items:flex-start;gap:12px;"><span style="color:#b8973a;margin-top:4px;">&#10003;</span>Tax efficiency planning</li><li style="font-size:15px;font-weight:300;color:#4a5570;line-height:1.85;padding:8px 0;border-bottom:1px solid rgba(46,74,125,0.06);display:flex;align-items:flex-start;gap:12px;"><span style="color:#b8973a;margin-top:4px;">&#10003;</span>Retirement and legacy planning</li></ul>
+            </div>
+            <div style="margin-bottom:3rem;">
+              <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#2e4a7d;margin-bottom:1rem;">This is not a one time document</h3>
+              <p style="font-size:15px;font-weight:300;color:#4a5570;line-height:1.9;">Life changes. Incomes grow. Families expand. Markets shift. Your plan should keep up. We review and update your financial plan regularly so it always reflects where you are and where you are going. You will never feel like you are working off outdated advice.</p>
+            </div>
+            <div style="margin-bottom:3rem;">
+              <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#2e4a7d;margin-bottom:1rem;">Who this is for</h3>
+              <p style="font-size:15px;font-weight:300;color:#4a5570;line-height:1.9;">Financial planning is for anyone who wants to be intentional about their money. Whether you are just starting out, growing a business, raising a family, or approaching retirement, having a clear plan is the single most important thing you can do for your financial future.</p>
+            </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div style="position:sticky;top:120px;">
+      <div style="background:#2e4a7d;border-radius:4px;padding:2.5rem;border-top:3px solid #b8973a;">
+        <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#f5e6d3;margin-bottom:1rem;">Ready to get started?</h3>
+        <p style="font-size:13px;font-weight:300;color:rgba(245,230,211,0.65);line-height:1.8;margin-bottom:1.5rem;">Schedule a complimentary 30-minute consultation. No obligation, just a conversation about your goals.</p>
+        <a href="index.html#contact" style="display:block;background:#b8973a;color:#1a2f5e;font-family:'Jost',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;padding:14px;border-radius:2px;text-align:center;text-decoration:none;">Schedule a consultation</a>
+        <div style="margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(245,230,211,0.1);">
+          <div style="font-size:12px;font-weight:300;color:rgba(245,230,211,0.5);margin-bottom:8px;">Call or email us directly</div>
+          <div style="font-size:13px;font-weight:400;color:#f5e6d3;">(704) 795-8146</div>
+          <div style="font-size:13px;font-weight:300;color:rgba(245,230,211,0.65);">ryan@hwealthpartners.com</div>
+        </div>
+      </div>
+
+      <div style="margin-top:1.5rem;background:rgba(46,74,125,0.06);border-radius:4px;padding:2rem;">
+        <h4 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#2e4a7d;margin-bottom:1rem;">Other services</h4>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <a href="financial-planning.html" style="font-size:13px;font-weight:300;color:#4a5570;text-decoration:none;">Financial Planning</a>
+          <a href="investment-management.html" style="font-size:13px;font-weight:300;color:#4a5570;text-decoration:none;">Investment Management</a>
+          <a href="tax-planning.html" style="font-size:13px;font-weight:300;color:#4a5570;text-decoration:none;">Tax Planning & Strategy</a>
+          <a href="estate-planning.html" style="font-size:13px;font-weight:300;color:#4a5570;text-decoration:none;">Estate & Legacy Planning</a>
+          <a href="risk-management.html" style="font-size:13px;font-weight:300;color:#4a5570;text-decoration:none;">Risk Management & Insurance</a>
+          <a href="retirement-planning.html" style="font-size:13px;font-weight:300;color:#4a5570;text-decoration:none;">Retirement Planning</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Hammond Wealth Partners</div>
+  <div class="footer-links">
+    <a href="#">Privacy policy</a>
+    <a href="#">Disclosures</a>
+    <a href="#">ADV brochure</a>
+    <a href="#">Form CRS</a>
+  </div>
+  <div class="footer-copy">© 2025 Hammond Wealth Partners</div>
+</footer>
+
+</body>
+</html>
