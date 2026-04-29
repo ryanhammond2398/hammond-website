@@ -213,6 +213,44 @@
     #about .affiliated { padding: 1.25rem !important; }
   }
 
+
+  @media (max-width: 768px) {
+    div[style*="grid-template-columns:repeat(3,1fr)"] { grid-template-columns: 1fr !important; }
+    section[style*="padding:8rem 4rem"] { padding: 3rem 1.5rem !important; }
+  }
+
+
+  @media (max-width: 768px) {
+    /* Pricing cards - stack to 1 column */
+    div[style*="grid-template-columns:repeat(3,1fr)"] { 
+      grid-template-columns: 1fr !important; 
+    }
+    /* All 2-column grids stack */
+    div[style*="grid-template-columns:1fr 1fr"] { 
+      grid-template-columns: 1fr !important; 
+    }
+    div[style*="grid-template-columns: 1fr 1fr"] { 
+      grid-template-columns: 1fr !important; 
+    }
+    /* Reduce padding on all sections */
+    section[style*="padding:8rem 4rem"] { padding: 3rem 1.5rem !important; }
+    section[style*="padding: 8rem 4rem"] { padding: 3rem 1.5rem !important; }
+    /* Service page sidebar */
+    div[style*="grid-template-columns:2fr 1fr"] { 
+      grid-template-columns: 1fr !important; 
+    }
+    /* Sticky sidebar */
+    div[style*="position:sticky"] { position: relative !important; top: auto !important; }
+    /* Philosophy section 3 columns */
+    div[style*="grid-template-columns:1fr 1fr 1fr"] { 
+      grid-template-columns: 1fr !important; 
+    }
+  }
+
+
+  section { scroll-margin-top: 100px; }
+  [id] { scroll-margin-top: 100px; }
+
 </style>
 </head>
 <body>
@@ -263,8 +301,8 @@
     <h1>Wealth management<br><em>that never sleeps</em></h1>
     <p class="hero-desc">Most advisors set up a portfolio and disappear. We don't. Hammond Wealth Partners combines rigorous economic analysis with proactive, hands-on guidance so your plan evolves as fast as your life does.</p>
     <div class="hero-actions">
-      <button class="btn-gold">Schedule a consultation</button>
-      <a href="#" class="btn-ghost">Learn our approach</a>
+      <a href="#contact" class="btn-gold" style="text-decoration:none;">Schedule a consultation</a>
+      <a href="#approach" class="btn-ghost">Learn our approach</a>
     </div>
     <div style="display:flex;gap:2rem;margin-top:2.5rem;padding-top:2rem;border-top:1px solid rgba(245,237,224,0.12);">
       <div style="display:flex;align-items:center;justify-content:center;gap:10px;">
@@ -424,7 +462,7 @@
       <p style="font-size:15px;font-weight:300;color:#4a5570;max-width:580px;margin:0 auto;line-height:1.85;">We believe you should know exactly what you are paying before you ever sign anything. As a fee-only firm we never earn commissions, so our only incentive is your success.</p>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;width:100%;">
       
       <!-- AUM -->
       <div style="background:#2e4a7d;border-radius:4px;padding:2.5rem 2rem;border-top:3px solid #b8973a;">
@@ -626,7 +664,7 @@
     <div style="font-size:10px;color:rgba(245,230,211,0.2);">© 2026 Hammond Wealth Partners. All rights reserved.</div>
     <div style="display:flex;gap:1.5rem;">
       <a href="privacy-notice.pdf" target="_blank" style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,230,211,0.2);text-decoration:none;">Privacy Policy</a>
-      <a href="https://www.adviserinfo.sec.gov/firm/summary/338574" target="_blank" style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,230,211,0.2);text-decoration:none;">Form ADV</a>
+      <a href="adv-part2a.pdf" target="_blank" style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,230,211,0.2);text-decoration:none;">Form ADV Part 2A</a>
       <a href="form-crs.pdf" target="_blank" style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,230,211,0.2);text-decoration:none;">Form CRS</a>
     </div>
   </div>
